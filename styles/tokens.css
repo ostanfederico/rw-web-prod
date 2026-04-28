@@ -152,6 +152,19 @@
   --in-app-notification-text-body: #e3e3e3;
   --in-app-notification-label: #f1f1f1;
 
+  /* === Checkbox (Prometheus)
+   * Scoped under --checkbox-* until full Prometheus token extraction lands.
+   * Matches Figma node 335:804 in the Prometheus Design System file.
+   * Bg/Checkbox/*, Border/Checkbox/Error, Icon/On Button/Primary, Text/Body|Disabled|Error.
+   */
+  --checkbox-bg: #eef5f4;
+  --checkbox-bg-disabled: #8a8a8a;
+  --checkbox-border-error: #b04540;
+  --checkbox-icon: #121c1a;
+  --checkbox-label: #e3e3e3;
+  --checkbox-label-disabled: #616161;
+  --checkbox-label-error: #d57672;
+
   /* === Pill Notification (Prometheus)
    * Scoped under --notification-* until full Prometheus token extraction lands.
    * Matches Figma node 571:2233 in the Prometheus Design System file.
