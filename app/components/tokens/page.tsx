@@ -1,26 +1,30 @@
 import { PageHeader } from "@/components/app-shell/PageHeader";
-import { BitcoinSpinner } from "@/components/icons/BitcoinSpinner";
-import { DogeSpinner } from "@/components/icons/DogeSpinner";
+import { TokenIcon } from "@/components/icons/TokenIcon";
 
 const tokens = [
-  { label: "BTC",  component: <BitcoinSpinner size={96} /> },
-  { label: "DOGE", component: <DogeSpinner size={96} /> },
+  "BTC", "ETH", "USDC", "USDT", "XRP", "SOL",
+  "BNB", "ADA", "AVAX", "DOGE", "SHIB", "DOT",
+  "MATIC", "LINK", "UNI", "LTC", "BCH", "ALGO",
+  "XLM", "PEPE", "DAI", "COMP", "MKR", "ZRX",
+  "BAT", "ENJ", "XMR", "XNO", "LRC", "ONDO",
+  "WLD", "DINO", "PYUSD", "FDUSD", "MNEE", "ONT",
+  "BSV", "EOS", "DASH",
 ];
 
 export default function TokensPage() {
   return (
     <>
-      <PageHeader title="Tokens" subtitle="Token logo animations." />
+      <PageHeader title="Tokens" subtitle={`${tokens.length} token logos from the design system.`} />
       <main className="px-5 pb-8">
-        <div className="grid grid-cols-3 gap-4">
-          {tokens.map(({ label, component }) => (
+        <div className="grid grid-cols-4 gap-4">
+          {tokens.map((symbol) => (
             <div
-              key={label}
-              className="flex flex-col items-center gap-3 rounded-xl bg-[var(--color-bg-card)] p-4"
+              key={symbol}
+              className="flex flex-col items-center gap-2 rounded-xl bg-[var(--color-bg-card)] p-4"
             >
-              {component}
+              <TokenIcon symbol={symbol} size={64} />
               <span className="text-xs font-medium text-[var(--color-fg-muted)]">
-                {label}
+                {symbol}
               </span>
             </div>
           ))}
