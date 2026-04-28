@@ -4,6 +4,10 @@ import { PageHeader } from "@/components/app-shell/PageHeader";
 
 const sections: { heading: string; entries: { name: string; href: string }[] }[] = [
   {
+    heading: "Amount Input",
+    entries: [{ name: "Amount Input", href: "/components/amount-input" }],
+  },
+  {
     heading: "Button",
     entries: [{ name: "Button Large", href: "/components/button" }],
   },

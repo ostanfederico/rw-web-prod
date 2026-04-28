@@ -84,6 +84,8 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   /* Prometheus component typography (Roboto). Body text stays --font-sans. */
   --font-prometheus: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  /* Prometheus display typography (Montserrat). Large numbers, unit labels. */
+  --font-display: var(--font-montserrat), Montserrat, sans-serif;
 
   /* === Button (Prometheus — Button Large)
    * Scoped under --btn-* until full Prometheus token extraction lands.
@@ -112,4 +114,14 @@
   --btn-text-label-disabled: #8a8a8a;
 
   --btn-pressed-inset: inset 0 4px 6px -2px rgb(0 0 0 / 0.25);
+
+  /* === Amount Input (Prometheus)
+   * Scoped under --amount-* until full Prometheus token extraction lands.
+   * Matches Figma node 2606:30380 in the Prometheus Design System file.
+   */
+  --amount-display-text: #ffffff;
+  --amount-display-decimal: rgba(255, 255, 255, 0.81);
+  --amount-unit-text: #f1f1f1;
+  --amount-body-text: #e3e3e3;
+  --amount-help-text: #b5b5b5;
 }
