@@ -151,4 +151,35 @@
   --in-app-notification-text-header: #f1f1f1;
   --in-app-notification-text-body: #e3e3e3;
   --in-app-notification-label: #f1f1f1;
+
+  /* === Pill Notification (Prometheus)
+   * Scoped under --notification-* until full Prometheus token extraction lands.
+   * Matches Figma node 571:2233 in the Prometheus Design System file.
+   * Bg/Temporary Notification/Default, Label/Tag/*, Icon/* variables.
+   */
+  --notification-bg: rgba(255, 255, 255, 0.46);
+  --notification-blur: 6px;
+  --notification-gap: 10px;
+  --notification-px: 16px;
+  --notification-py: 12px;
+  --notification-success-label: #1e3e27;
+  --notification-success-icon: #377147;
+  --notification-error-label: #1d0b0a;
+  --notification-error-icon: #752e2a;
+  --notification-warning-label: #262110;
+  --notification-warning-icon: #eaca66;
+  --notification-dismiss-icon: #616161;
+}
+
+/* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */
+@keyframes notification-show {
+  0%   { opacity: 0; transform: translateY(12px); }
+  15%  { opacity: 1; transform: translateY(0);    }
+  80%  { opacity: 1; transform: translateY(0);    }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+
+@keyframes notification-dismiss {
+  from { opacity: 1; transform: translateY(0);    }
+  to   { opacity: 0; transform: translateY(12px); }
 }
