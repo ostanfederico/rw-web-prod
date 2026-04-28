@@ -15,6 +15,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     heading: "In-App Notification",
     entries: [{ name: "In-App Notification", href: "/components/in-app-notification" }],
   },
+  {
+    heading: "Tokens",
+    entries: [{ name: "Tokens", href: "/components/tokens" }],
+  },
 ];
 
 export default function ComponentsPage() {
