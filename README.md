@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RW Product Whiteboard
 
-## Getting Started
+The **Product Whiteboard** is a Progressive Web App that PMs and designers at RockWallet use to prototype mobile flows. It's frontend-only with mocked data. You install it on your phone via "Add to Home Screen" and iterate.
 
-First, run the development server:
+This is **Phase 1** of a larger arc. When a component reaches "ready" here, it graduates to the (separate) `@rockwallet/ui` design-system repo, gets published to npm, and is then consumed by the native Swift / Kotlin apps via WebView. See [`docs/ROADMAP.md`](./docs/ROADMAP.md).
+
+## What's in this repo
+
+- **Next.js 16 (App Router)** + **Tailwind CSS v4** + **TypeScript**
+- An app-shell with bottom nav: Home / Components / Flows / More
+- PWA manifest + Apple meta tags so it installs on iPhone and Android
+- Design tokens seeded from RockWallet's native theme; mapped to the Prometheus Figma library
+
+## Quick start (local)
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000> and resize the window to ~390 px wide to preview phone layout.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How the team works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+→ Read [`docs/WORKFLOW.md`](./docs/WORKFLOW.md) — branches, preview URLs, how to add a flow or component.
+→ Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) — short version of the same.
+→ Read [`docs/ROADMAP.md`](./docs/ROADMAP.md) — where this is going.
 
-## Learn More
+## Links
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- GitHub: <https://github.com/ostanfederico/rw-web-prod>
+- Vercel: <https://vercel.com/federico-ostan-bazans-projects/rw-web-prod>
+- Prometheus Design System (Figma): <https://www.figma.com/design/vT4esHtsM9b4JdCy2q5Nex/Prometheus-Design-System>
+- Prometheus Icons (Figma): <https://www.figma.com/design/R94pMAkvOLPDbJZFSVOg8E/Prometheus-Icons>

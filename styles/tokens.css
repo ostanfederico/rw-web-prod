@@ -1,0 +1,85 @@
+/*
+ * Prometheus Design System tokens
+ * ---------------------------------
+ * Source of truth: Figma — Prometheus Design System
+ *   https://www.figma.com/design/vT4esHtsM9b4JdCy2q5Nex
+ *
+ * The values below are SEED VALUES copied from the native Android theme module
+ * (rockwallet-repos/wallet-v2-android/theme/src/main/java/com/rockwallet/theme/Color.kt)
+ * so day one looks like RockWallet, not generic Tailwind.
+ *
+ * They will be replaced by the canonical Prometheus tokens extracted from Figma
+ * in a follow-up PR. The Prometheus library uses a slash-namespaced scheme:
+ *   - Color/*       (e.g. Icon/Body, Text/Body)
+ *   - Size/*        (e.g. Size/300 = 12px, Size/400 = 16px)
+ *   - Space/*       (e.g. Space/100 = 4px)
+ *   - font-weight/* (e.g. font-weight/regular = 400)
+ *   - letter-space/*
+ *   - Text styles (composite tokens like Body/Small)
+ *
+ * When we promote tokens, normalize slashes to dashes for CSS:
+ *   Size/300       → --size-300
+ *   Space/100      → --space-100
+ *   Text/Body      → --color-text-body
+ */
+
+@theme {
+  /* === Brand color (Primary, dark-mode aligned) === */
+  --color-primary-2: #0a2923;
+  --color-primary-7: #9ec9c0;
+  --color-primary-10: #2f917f;
+  --color-primary-11: #5b9186;
+  --color-primary-12: #49746b;
+  --color-primary-13: #495b57;
+  --color-primary-14: #243a35;
+  --color-primary-14-5: #1c2b28;
+  --color-primary-15: #121c1a;
+
+  /* === Surface (dark) === */
+  --color-bg: #12151b;
+  --color-bg-raised: #1c2b28;
+  --color-bg-card: #243a35;
+  --color-border: rgba(255, 255, 255, 0.11);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* === Text === */
+  --color-fg: #ffffff;
+  --color-fg-muted: rgba(255, 255, 255, 0.71);
+  --color-fg-subtle: rgba(255, 255, 255, 0.46);
+  --color-fg-disabled: rgba(255, 255, 255, 0.2);
+
+  /* === Status === */
+  --color-success: #5fb175;
+  --color-warning: #eaca66;
+  --color-danger: #d57672;
+  --color-info: #97adff;
+
+  /* === Spacing (mirrors Android Spacing.kt names) === */
+  --spacing-0: 0px;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-075: 6px;
+  --spacing-100: 8px;
+  --spacing-125: 10px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-250: 20px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-800: 64px;
+  --spacing-1000: 80px;
+
+  /* === Radii === */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* === Type scale === */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
