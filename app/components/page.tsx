@@ -12,6 +12,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     entries: [{ name: "Button Large", href: "/components/button" }],
   },
   {
+    heading: "Entry Point",
+    entries: [{ name: "Entry Point", href: "/components/entry-point" }],
+  },
+  {
     heading: "In-App Notification",
     entries: [{ name: "In-App Notification", href: "/components/in-app-notification" }],
   },

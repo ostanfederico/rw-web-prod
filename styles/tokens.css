@@ -125,6 +125,20 @@
   --amount-body-text: #e3e3e3;
   --amount-help-text: #b5b5b5;
 
+  /* === Entry Point (CRB promotional card)
+   * Scoped under --ep-* until full Prometheus token extraction lands.
+   * Matches Figma node 3473:97541 in the CRB-Explorations file.
+   * Bg/Card/Transparent, Text/Header, Text/Body, Bg/Button/Secondary/Enabled,
+   * Border/Button/Secondary/Default, Label/Button/Secondary/Default
+   */
+  --ep-bg: rgba(18, 21, 27, 0.46);
+  --ep-title: #f1f1f1;
+  --ep-body: #e3e3e3;
+  --ep-btn-bg: rgba(255, 255, 255, 0.11);
+  --ep-btn-bg-pressed: rgba(255, 255, 255, 0.06);
+  --ep-btn-border: rgba(255, 255, 255, 0.2);
+  --ep-btn-label: #f1f1f1;
+
   /* === In-App Notification (Prometheus)
    * Scoped under --in-app-notification-* until full Prometheus token extraction lands.
    * Matches Figma node 2353:17784 in the Prometheus Design System file.
