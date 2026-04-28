@@ -19,6 +19,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     heading: "Tokens",
     entries: [{ name: "Tokens", href: "/components/tokens" }],
   },
+  {
+    heading: "Popover",
+    entries: [{ name: "Notification Popover", href: "/components/notification-popover" }],
+  },
 ];
 
 export default function ComponentsPage() {
