@@ -36,12 +36,16 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     entries: [{ name: "Pill Notification", href: "/components/pill-notification" }],
   },
   {
-    heading: "Tokens",
-    entries: [{ name: "Tokens", href: "/components/tokens" }],
-  },
-  {
     heading: "Popover",
     entries: [{ name: "Notification Popover", href: "/components/notification-popover" }],
+  },
+  {
+    heading: "Tag",
+    entries: [{ name: "Tag", href: "/components/tag" }],
+  },
+  {
+    heading: "Tokens",
+    entries: [{ name: "Tokens", href: "/components/tokens" }],
   },
 ];
 

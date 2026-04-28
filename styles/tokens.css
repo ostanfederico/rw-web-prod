@@ -211,6 +211,20 @@
   --widget-header: var(--color-fg);
   --widget-label: var(--color-fg);
   --widget-sublabel: var(--color-fg-subtle);
+
+  /* === Tag (Prometheus)
+   * Scoped under --tag-* until full Prometheus token extraction lands.
+   * Matches Figma node 2714:17087 in the Prometheus Design System file.
+   * Bg/Tag/*, Label/Tag/*
+   */
+  --tag-bg-positive: #d6ebdc;
+  --tag-bg-negative: #edd5d4;
+  --tag-bg-warning: #faf3dd;
+  --tag-bg-neutral: #bac7ff;
+  --tag-label-positive: #1e3e27;
+  --tag-label-negative: #1d0b0a;
+  --tag-label-warning: #262110;
+  --tag-label-neutral: #001633;
 }
 
 /* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */
