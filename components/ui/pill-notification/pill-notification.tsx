@@ -53,9 +53,10 @@ export function PillNotification({ variant, message, onDismiss }: PillNotificati
         background: "var(--notification-bg)",
         backdropFilter: "blur(var(--notification-blur))",
         WebkitBackdropFilter: "blur(var(--notification-blur))",
+        bottom: "calc(68px + env(safe-area-inset-bottom))",
       }}
       className={cn(
-        "fixed bottom-[68px] left-1/2 -translate-x-1/2 z-50",
+        "fixed left-1/2 -translate-x-1/2 z-[60]",
         "inline-flex items-center gap-[var(--notification-gap)]",
         "px-[var(--notification-px)] py-[var(--notification-py)]",
         "rounded-full",
