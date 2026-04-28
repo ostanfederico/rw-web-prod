@@ -66,6 +66,7 @@ export default function InAppNotificationPage() {
             kind={demoKind}
             onDismiss={dismiss}
             onCtaClick={dismiss}
+            className="pt-[max(env(safe-area-inset-top),2rem)]"
           />
         </div>,
         document.body
