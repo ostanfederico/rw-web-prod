@@ -11,6 +11,7 @@ export function EntryPoint({ onCtaPress, className, ...rest }: EntryPointProps) 
       className={cn(
         "relative w-full overflow-hidden rounded-[16px] px-4 py-4 flex flex-col gap-3",
         "bg-[var(--ep-bg)] backdrop-blur-[7px]",
+        "border border-[rgba(255,255,255,0.08)]",
         "shadow-[0px_2px_15px_-2px_rgba(0,0,0,0.25)]",
         className
       )}
@@ -46,7 +47,7 @@ export function EntryPoint({ onCtaPress, className, ...rest }: EntryPointProps) 
 
       {/* Credit card image — absolutely positioned over the right side */}
       <div
-        className="absolute pointer-events-none overflow-hidden"
+        className="absolute pointer-events-none"
         style={{ height: "128.747px", left: "191px", top: "26px", width: "178.629px" }}
         aria-hidden="true"
       >

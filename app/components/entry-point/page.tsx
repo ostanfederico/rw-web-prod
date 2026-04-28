@@ -11,9 +11,12 @@ export default function EntryPointPage() {
       <main className="px-5 pb-8 space-y-8">
         <section className="space-y-3">
           <h2 className="text-xs uppercase tracking-wide text-[var(--color-fg-subtle)]">
-            Default
+            Default (Home screen context)
           </h2>
-          <EntryPoint />
+          {/* Gradient simulates the Home screen background the card sits on */}
+          <div className="rounded-[16px] overflow-hidden bg-gradient-to-b from-[var(--color-primary-14)] to-[var(--color-primary-15)]">
+            <EntryPoint />
+          </div>
         </section>
       </main>
     </>
