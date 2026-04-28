@@ -12,6 +12,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     entries: [{ name: "Button Large", href: "/components/button" }],
   },
   {
+    heading: "Confetti",
+    entries: [{ name: "Confetti", href: "/components/confetti" }],
+  },
+  {
     heading: "Entry Point",
     entries: [{ name: "Entry Point", href: "/components/entry-point" }],
   },

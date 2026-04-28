@@ -169,6 +169,19 @@
   --notification-warning-label: #262110;
   --notification-warning-icon: #eaca66;
   --notification-dismiss-icon: #616161;
+
+  /* === Confetti (one-off celebratory animation)
+   * Rainbow palette read at runtime via getComputedStyle for canvas drawing.
+   * Scoped under --confetti-*.
+   */
+  --confetti-red: #e55a5a;
+  --confetti-orange: #e8904a;
+  --confetti-yellow: #eaca66;
+  --confetti-green: #5fb175;
+  --confetti-teal: #9ec9c0;
+  --confetti-blue: #5fa5e8;
+  --confetti-purple: #9b7fe8;
+  --confetti-pink: #e87fc0;
 }
 
 /* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */
