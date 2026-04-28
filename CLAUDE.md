@@ -33,8 +33,40 @@ Next.js 16 (App Router, Turbopack) + Tailwind CSS v4 + TypeScript. Mobile-first:
 - **Never** hardcode hex values. Always use CSS variables from `styles/tokens.css`.
 - **Never** add real network calls or auth. This canvas is mock-only.
 - **Don't** add tests in this repo. Tests come at graduation time in `@rockwallet/ui`.
-- Use `lucide-react` icons; match the visual weight of `BottomNav` (size 22 for primary, 16 for trailing/inline, 28 for empty-state hero).
+- **Icons — two layers, never mixed:**
+  - App-shell chrome (`BottomNav`, `PullToRefresh`, shell utilities): use `lucide-react`. Size convention: 22 primary, 16 trailing/inline, 28 empty-state hero.
+  - Every reusable component (`components/ui/`): extract the icon from the **Prometheus Icons file** (`R94pMAkvOLPDbJZFSVOg8E`) into `components/icons/<IconName>.tsx` as an inline SVG (`24×24`, `currentColor`, `strokeWidth={1.5}`, `aria-hidden="true"`). Never import `lucide-react` inside a canvas component.
 - `"use client"` only when you need browser APIs.
+
+## Prometheus-first component workflow
+
+Before writing any component code — or before reaching for a third-party component — always ask: **does this already exist in the Prometheus Design System?**
+
+### Rule 1 — Check Figma before building
+
+When the user asks for a new component (Button, Alert, Toggle, Avatar, Card, Badge, etc.):
+
+1. Check the Prometheus Design System file (`vT4esHtsM9b4JdCy2q5Nex`) first.
+2. If the component exists in Figma: link to it and say so — "This already exists in Prometheus. Want me to build it in the canvas from the Figma source?" Then use the `new-component` skill.
+3. If the component does **not** exist in Figma: flag it — "I don't see a Prometheus equivalent for this. We may be inventing a one-off. Should we still proceed?" — and wait for confirmation.
+
+### Rule 2 — Warn about canvas duplication
+
+If the user asks to use or reference a component type that could map to Prometheus but isn't yet in `components/ui/`, respond with:
+
+> "That sounds like a **[ComponentName]** from the Prometheus Design System (Figma: `vT4esHtsM9b4JdCy2q5Nex`). It hasn't been built in the canvas yet — want me to build it from the Figma design so it follows the Prometheus spec?"
+
+Only proceed to build an ad-hoc or inline component if the user explicitly confirms they don't need a reusable one.
+
+### Rule 3 — Never invent icons
+
+All component-internal icons must come from `components/icons/`. If an icon isn't there yet:
+
+1. Look it up in the Prometheus Icons file (`R94pMAkvOLPDbJZFSVOg8E`).
+2. Extract the SVG path from Figma using `get_design_context` or `get_screenshot`.
+3. Add it as `components/icons/<IconName>.tsx` before using it.
+
+Never use `lucide-react` inside a `components/ui/` component. Never guess or approximate an SVG path.
 
 ## Claude Code config (`.claude/`) — shared with the team
 
