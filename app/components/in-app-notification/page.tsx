@@ -59,7 +59,7 @@ export default function InAppNotificationPage() {
             "transition-transform duration-300 ease-out",
             visible ? "translate-y-0" : "-translate-y-full"
           )}
-          style={{ top: "env(safe-area-inset-top)" }}
+          style={{ top: 0 }}
         >
           <InAppNotification
             state={demoState}
