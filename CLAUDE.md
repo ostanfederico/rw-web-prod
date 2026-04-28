@@ -35,7 +35,15 @@ Next.js 16 (App Router, Turbopack) + Tailwind CSS v4 + TypeScript. Mobile-first:
 - **Don't** add tests in this repo. Tests come at graduation time in `@rockwallet/ui`.
 - Use `lucide-react` icons; match the visual weight of `BottomNav` (size 22 for primary, 16 for trailing/inline, 28 for empty-state hero).
 - `"use client"` only when you need browser APIs.
-- `.claude/` is gitignored — never check it in.
+
+## Claude Code config (`.claude/`) — shared with the team
+
+`.claude/` is **checked into git**. Skills, slash commands, agents, hooks, and the shared `settings.json` live there so the whole team gets the same Claude experience on clone.
+
+- **Shared (committed):** `.claude/skills/`, `.claude/commands/`, `.claude/agents/`, `.claude/hooks/`, `.claude/settings.json`.
+- **Local-only (gitignored):** `.claude/settings.local.json`, `.claude/scheduled_tasks.lock`, `.claude/projects/`, `.claude/todos/`, `.claude/cache/`. See `.gitignore` for the canonical list.
+- **Never commit secrets.** No API keys, no tokens, no machine-specific paths. If you add something sensitive, gitignore it explicitly.
+- **Adding a new component** is wired through the `new-component` skill — invoke via `/new-component` or just say "let's build {ComponentName}".
 
 ## Vercel config
 
