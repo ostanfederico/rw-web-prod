@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/app-shell/BottomNav";
+import { PullToRefresh } from "@/components/app-shell/PullToRefresh";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,7 +56,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
-        <div className="phone-frame pb-24">{children}</div>
+        <PullToRefresh>
+          <div className="phone-frame pb-24">{children}</div>
+        </PullToRefresh>
         <BottomNav />
       </body>
     </html>
