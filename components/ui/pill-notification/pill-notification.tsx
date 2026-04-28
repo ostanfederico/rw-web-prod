@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 import { CheckRing } from "@/components/icons/CheckRing";
 import { Close } from "@/components/icons/Close";
@@ -30,6 +31,7 @@ const labelClass: Record<PillNotificationVariant, string> = {
 };
 
 export function PillNotification({ variant, message, onDismiss }: PillNotificationProps) {
+  const [mounted, setMounted] = useState(false);
   const [dismissing, setDismissing] = useState(false);
   const dismissed = useRef(false);
 
@@ -41,11 +43,14 @@ export function PillNotification({ variant, message, onDismiss }: PillNotificati
   };
 
   useEffect(() => {
+    setMounted(true);
     const t = setTimeout(triggerDismiss, 4000);
     return () => clearTimeout(t);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
       role="status"
       aria-live="polite"
@@ -53,10 +58,12 @@ export function PillNotification({ variant, message, onDismiss }: PillNotificati
         background: "var(--notification-bg)",
         backdropFilter: "blur(var(--notification-blur))",
         WebkitBackdropFilter: "blur(var(--notification-blur))",
-        bottom: "calc(68px + env(safe-area-inset-bottom))",
+        // Nav bar (~64px) + 60px requested margin + safe-area on iPhone
+        bottom: "calc(124px + env(safe-area-inset-bottom))",
+        zIndex: 9999,
       }}
       className={cn(
-        "fixed left-1/2 -translate-x-1/2 z-[60]",
+        "fixed left-1/2 -translate-x-1/2",
         "inline-flex items-center gap-[var(--notification-gap)]",
         "px-[var(--notification-px)] py-[var(--notification-py)]",
         "rounded-full",
@@ -82,6 +89,7 @@ export function PillNotification({ variant, message, onDismiss }: PillNotificati
       >
         <Close size={24} />
       </button>
-    </div>
+    </div>,
+    document.body
   );
 }
