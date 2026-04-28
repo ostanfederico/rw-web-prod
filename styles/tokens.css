@@ -82,4 +82,34 @@
   /* === Type scale === */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  /* Prometheus component typography (Roboto). Body text stays --font-sans. */
+  --font-prometheus: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+
+  /* === Button (Prometheus — Button Large)
+   * Scoped under --btn-* until full Prometheus token extraction lands.
+   * Matches Figma node 299:1034 in the Prometheus Design System file.
+   */
+  --btn-primary-bg: #e3e3e3;
+  --btn-primary-bg-hover: #f1f1f1;
+  --btn-primary-bg-pressed: #d4d4d4;
+  --btn-primary-bg-disabled: #b5b5b5;
+  --btn-primary-label: #121c1a;
+  --btn-primary-label-disabled: #616161;
+  --btn-primary-border: #b5b5b5;
+
+  --btn-secondary-bg: rgb(255 255 255 / 0.11);
+  --btn-secondary-bg-hover: rgb(255 255 255 / 0.20);
+  --btn-secondary-bg-pressed: rgb(255 255 255 / 0.06);
+  --btn-secondary-bg-disabled: rgb(255 255 255 / 0.02);
+  --btn-secondary-border: rgb(255 255 255 / 0.20);
+  --btn-secondary-border-disabled: rgb(255 255 255 / 0.03);
+  --btn-secondary-label: #f1f1f1;
+  --btn-secondary-label-disabled: #8a8a8a;
+
+  --btn-text-label: #f1f1f1;
+  --btn-text-label-hover: #e3e3e3;
+  --btn-text-label-pressed: #cccccc;
+  --btn-text-label-disabled: #8a8a8a;
+
+  --btn-pressed-inset: inset 0 4px 6px -2px rgb(0 0 0 / 0.25);
 }
