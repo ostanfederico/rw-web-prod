@@ -124,4 +124,17 @@
   --amount-unit-text: #f1f1f1;
   --amount-body-text: #e3e3e3;
   --amount-help-text: #b5b5b5;
+
+  /* === In-App Notification (Prometheus)
+   * Scoped under --in-app-notification-* until full Prometheus token extraction lands.
+   * Matches Figma node 2353:17784 in the Prometheus Design System file.
+   * Bg/System Notification/Transparent, Border/In-app Notification/*, Text/Header, Text/Body
+   */
+  --in-app-notification-bg: rgba(0, 22, 51, 0.46);
+  --in-app-notification-border-default: rgba(151, 173, 255, 0.46);
+  --in-app-notification-border-error: rgba(213, 118, 114, 0.46);
+  --in-app-notification-border-warning: rgba(234, 202, 102, 0.46);
+  --in-app-notification-text-header: #f1f1f1;
+  --in-app-notification-text-body: #e3e3e3;
+  --in-app-notification-label: #f1f1f1;
 }

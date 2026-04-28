@@ -11,6 +11,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     heading: "Button",
     entries: [{ name: "Button Large", href: "/components/button" }],
   },
+  {
+    heading: "In-App Notification",
+    entries: [{ name: "In-App Notification", href: "/components/in-app-notification" }],
+  },
 ];
 
 export default function ComponentsPage() {
