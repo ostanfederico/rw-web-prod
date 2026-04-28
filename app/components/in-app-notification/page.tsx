@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { PageHeader } from "@/components/app-shell/PageHeader";
 import { Button } from "@/components/ui/button";
 import { InAppNotification } from "@/components/ui/in-app-notification";
@@ -28,7 +29,11 @@ export default function InAppNotificationPage() {
   const [demoKind, setDemoKind] = useState<NotifKind>("system");
   const [demoState, setDemoState] = useState<NotifState>("default");
   const [visible, setVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Portal requires document.body — only available client-side
+  useEffect(() => setMounted(true), []);
 
   const dismiss = useCallback(() => {
     setVisible(false);
@@ -46,22 +51,25 @@ export default function InAppNotificationPage() {
 
   return (
     <>
-      {/* Live overlay — fixed at viewport top, centered within phone-frame width */}
-      <div
-        className={cn(
-          "fixed left-0 right-0 z-50 max-w-[440px] mx-auto",
-          "transition-transform duration-300 ease-out",
-          visible ? "translate-y-0" : "-translate-y-full"
-        )}
-        style={{ top: "env(safe-area-inset-top)" }}
-      >
-        <InAppNotification
-          state={demoState}
-          kind={demoKind}
-          onDismiss={dismiss}
-          onCtaClick={dismiss}
-        />
-      </div>
+      {/* Portal renders directly into document.body, escaping PullToRefresh's transform */}
+      {mounted && createPortal(
+        <div
+          className={cn(
+            "fixed left-0 right-0 z-50 max-w-[440px] mx-auto",
+            "transition-transform duration-300 ease-out",
+            visible ? "translate-y-0" : "-translate-y-full"
+          )}
+          style={{ top: "env(safe-area-inset-top)" }}
+        >
+          <InAppNotification
+            state={demoState}
+            kind={demoKind}
+            onDismiss={dismiss}
+            onCtaClick={dismiss}
+          />
+        </div>,
+        document.body
+      )}
 
       <PageHeader
         title="In-App Notification"
