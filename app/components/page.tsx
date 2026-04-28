@@ -20,6 +20,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     entries: [{ name: "Entry Point", href: "/components/entry-point" }],
   },
   {
+    heading: "Homescreen Widget",
+    entries: [{ name: "Homescreen Widget", href: "/components/homescreen-widget" }],
+  },
+  {
     heading: "In-App Notification",
     entries: [{ name: "In-App Notification", href: "/components/in-app-notification" }],
   },
