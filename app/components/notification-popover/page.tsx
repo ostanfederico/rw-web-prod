@@ -107,7 +107,7 @@ function NotificationBell() {
           )}
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-1">
+      <PopoverContent className="w-80 p-1" align="start">
         <div className="flex items-baseline justify-between gap-4 px-3 py-2">
           <div className="text-sm font-semibold text-[var(--color-fg)]">Notifications</div>
           {unreadCount > 0 && (
@@ -168,8 +168,10 @@ function NotificationBell() {
 
 export default function NotificationPopoverPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <NotificationBell />
+    <main className="relative min-h-screen">
+      <div className="absolute top-4 left-4">
+        <NotificationBell />
+      </div>
     </main>
   );
 }
