@@ -1,5 +1,5 @@
 import { PageHeader } from "@/components/app-shell/PageHeader";
-import { TokenIcon } from "@/components/icons/TokenIcon";
+import { SpinnableTokenIcon } from "@/components/icons/SpinnableTokenIcon";
 
 const tokens = [
   "BTC", "ETH", "USDC", "USDT", "XRP", "SOL",
@@ -22,7 +22,7 @@ export default function TokensPage() {
               key={symbol}
               className="flex flex-col items-center gap-2 rounded-xl bg-[var(--color-bg-card)] p-4"
             >
-              <TokenIcon symbol={symbol} size={64} />
+              <SpinnableTokenIcon symbol={symbol} size={64} />
               <span className="text-xs font-medium text-[var(--color-fg-muted)]">
                 {symbol}
               </span>
