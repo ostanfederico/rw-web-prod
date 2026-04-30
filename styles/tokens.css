@@ -183,6 +183,12 @@
   --notification-warning-icon: #eaca66;
   --notification-dismiss-icon: #616161;
 
+  /* === Spinner (Prometheus)
+   * Scoped under --spinner-* until full Prometheus token extraction lands.
+   * Matches Figma node 860:1938 in the Prometheus Design System file.
+   */
+  --spinner-arc: rgba(255, 255, 255, 0.71);
+
   /* === Confetti (one-off celebratory animation)
    * Rainbow palette read at runtime via getComputedStyle for canvas drawing.
    * Scoped under --confetti-*.
@@ -225,6 +231,10 @@
   --tag-label-negative: #1d0b0a;
   --tag-label-warning: #262110;
   --tag-label-neutral: #001633;
+}
+
+@keyframes spinner-spin {
+  to { transform: rotate(360deg); }
 }
 
 /* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */

@@ -40,6 +40,10 @@ const sections: { heading: string; entries: { name: string; href: string }[] }[]
     entries: [{ name: "Notification Popover", href: "/components/notification-popover" }],
   },
   {
+    heading: "Spinner",
+    entries: [{ name: "Spinner", href: "/components/spinner" }],
+  },
+  {
     heading: "Tag",
     entries: [{ name: "Tag", href: "/components/tag" }],
   },
