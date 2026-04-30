@@ -475,8 +475,11 @@ export default function WrappedPage() {
       <button
         type="button"
         onClick={() => router.push("/flows")}
-        className="absolute top-4 right-4 z-50 flex items-center justify-center w-9 h-9 rounded-full"
-        style={{ background: "rgba(0,0,0,0.35)" }}
+        className="absolute right-4 z-50 flex items-center justify-center w-11 h-11 rounded-full"
+        style={{
+          top: "calc(env(safe-area-inset-top) + 12px)",
+          background: "rgba(0,0,0,0.35)",
+        }}
         aria-label="Exit Wrapped"
       >
         <X size={18} color="rgba(255,255,255,0.8)" />

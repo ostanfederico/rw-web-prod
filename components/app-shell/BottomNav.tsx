@@ -17,8 +17,12 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
+const HIDDEN_ON = ["/flows/wrapped"];
+
 export function BottomNav() {
   const pathname = usePathname();
+
+  if (HIDDEN_ON.some((p) => pathname.startsWith(p))) return null;
 
   return (
     <nav
