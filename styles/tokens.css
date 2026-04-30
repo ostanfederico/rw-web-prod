@@ -231,11 +231,42 @@
   --tag-label-negative: #1d0b0a;
   --tag-label-warning: #262110;
   --tag-label-neutral: #001633;
+
+  /* === Wrapped flow (2025 year-in-review story)
+   * Per-slide gradient stop colors. Referenced via inline style gradients.
+   * Scoped under --wrapped-*.
+   */
+  --wrapped-1-from: #3b0764;
+  --wrapped-1-to: #0d9488;
+  --wrapped-2-from: #052e16;
+  --wrapped-2-to: #059669;
+  --wrapped-3-from: #451a03;
+  --wrapped-3-to: #d97706;
+  --wrapped-4-from: #1c1917;
+  --wrapped-4-to: #ca8a04;
+  --wrapped-5-from: #0f172a;
+  --wrapped-5-to: #4f46e5;
+  --wrapped-6-from: #4c0519;
+  --wrapped-6-to: #e11d48;
+  --wrapped-7-from: #2e1065;
+  --wrapped-7-to: #c026d3;
+  --wrapped-8-from: #042f2e;
+  --wrapped-8-to: #0891b2;
+  --wrapped-9-from: #1e1b4b;
+  --wrapped-9-to: #2563eb;
+  --wrapped-10-from: #1a0533;
+  --wrapped-10-to: #db2777;
+
+  /* === Social brand colors (mock share sheet in Wrapped flow) */
+  --social-instagram: #e1306c;
+  --social-x: #0f1419;
+  --social-whatsapp: #25d366;
+  --social-facebook: #1877f2;
+  --social-tiktok: #010101;
 }
 
 @keyframes spinner-spin {
   to { transform: rotate(360deg); }
-}
 
 /* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */
 @keyframes notification-show {
@@ -248,4 +279,9 @@
 @keyframes notification-dismiss {
   from { opacity: 1; transform: translateY(0);    }
   to   { opacity: 0; transform: translateY(12px); }
+}
+
+@keyframes swipe-nudge {
+  0%, 100% { transform: translateX(0); opacity: 0.8; }
+  50% { transform: translateX(10px); opacity: 1; }
 }

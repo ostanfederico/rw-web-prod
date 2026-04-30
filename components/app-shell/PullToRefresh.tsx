@@ -91,7 +91,7 @@ export function PullToRefresh({ children }: { children: ReactNode }) {
       </div>
       <div
         style={{
-          transform: `translateY(${pull}px)`,
+          transform: pull === 0 ? undefined : `translateY(${pull}px)`,
           transition: refreshing || pull === 0 ? "transform 200ms ease" : "none",
         }}
       >

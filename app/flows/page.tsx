@@ -8,6 +8,11 @@ const FLOWS = [
     label: "Home Screen",
     description: "Chime-inspired dashboard — balance hero, account card, promo carousel",
   },
+  {
+    href: "/flows/wrapped",
+    label: "2025 Wrapped",
+    description: "Spotify-style year-in-review — volume, top tokens, personality, swipeable story",
+  },
 ];
 
 export default function FlowsPage() {

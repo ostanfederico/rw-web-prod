@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useCallback, useEffect } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 
 type Shape = "circle" | "rect" | "triangle";
@@ -36,16 +37,18 @@ const COLOR_VARS = [
 const SHAPES: Shape[] = ["circle", "rect", "triangle"];
 const COUNT = 150;
 const SIZE = 8;
-const GRAVITY = 0.28;
-const DRAG = 0.987;
-const DURATION = 3400;
+const GRAVITY = 0.12;
+const DRAG = 0.985;
+const DURATION = 5000;
 
 export function Confetti({ label = "Celebrate 🎉", className }: ConfettiProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const rafRef = useRef<number>(0);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     return () => cancelAnimationFrame(rafRef.current);
   }, []);
 
@@ -73,7 +76,7 @@ export function Confetti({ label = "Celebrate 🎉", className }: ConfettiProps)
     const particles: Particle[] = Array.from({ length: COUNT }, () => {
       // Fan upward with wide spread to sides
       const angle = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.5;
-      const speed = 5 + Math.random() * 10;
+      const speed = 3 + Math.random() * 7;
       return {
         x: ox + (Math.random() - 0.5) * width,
         y: oy,
@@ -139,13 +142,17 @@ export function Confetti({ label = "Celebrate 🎉", className }: ConfettiProps)
     rafRef.current = requestAnimationFrame(frame);
   }, []);
 
+  const canvas = (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[70]"
+      aria-hidden="true"
+    />
+  );
+
   return (
     <>
-      <canvas
-        ref={canvasRef}
-        className="pointer-events-none fixed inset-0 z-50"
-        aria-hidden="true"
-      />
+      {mounted && createPortal(canvas, document.body)}
       <button
         ref={buttonRef}
         type="button"
