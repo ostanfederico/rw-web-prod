@@ -404,6 +404,14 @@ export default function WrappedPage() {
     return () => clearTimeout(t);
   }, []);
 
+  // Lock document scroll for the lifetime of this flow
+  useEffect(() => {
+    const html = document.documentElement;
+    const prev = html.style.overflow;
+    html.style.overflow = "hidden";
+    return () => { html.style.overflow = prev; };
+  }, []);
+
   const next = useCallback(() => setCurrent((c) => Math.min(c + 1, TOTAL - 1)), []);
   const prev = useCallback(() => setCurrent((c) => Math.max(c - 1, 0)), []);
 
@@ -455,6 +463,7 @@ export default function WrappedPage() {
   return (
     <div
       className="fixed inset-0 z-[60] overflow-hidden bg-black"
+      style={{ touchAction: "none" }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onClick={handleClick}
