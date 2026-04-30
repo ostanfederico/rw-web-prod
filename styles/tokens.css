@@ -267,6 +267,7 @@
 
 @keyframes spinner-spin {
   to { transform: rotate(360deg); }
+}
 
 /* 0.6s slide-up → 2.6s hold → 0.8s slide-down (total 4s) */
 @keyframes notification-show {
