@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { X, Share2, FileText } from "lucide-react";
 import { Confetti } from "@/components/ui/confetti";
@@ -388,8 +389,9 @@ const SOCIAL_OPTIONS = [
 
 export default function WrappedPage() {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const [current, setCurrent] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const [showHint, setShowHint] = useState(true);
   const [showShareSheet, setShowShareSheet] = useState(false);
@@ -399,6 +401,8 @@ export default function WrappedPage() {
     setToast(msg);
     setTimeout(() => setToast(null), 2500);
   }, []);
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const t = setTimeout(() => setShowHint(false), 3200);
@@ -424,11 +428,13 @@ export default function WrappedPage() {
   const handleTouchMove = (e: React.TouchEvent) => {
     if (showShareSheet || touchStartX.current === null) return;
     const delta = e.touches[0].clientX - touchStartX.current;
-    // Resist at the edges so it doesn't feel like it goes nowhere
-    if ((current === 0 && delta > 0) || (current === TOTAL - 1 && delta < 0)) {
-      setDragOffset(delta * 0.2);
-    } else {
-      setDragOffset(delta);
+    const resistedDelta =
+      (current === 0 && delta > 0) || (current === TOTAL - 1 && delta < 0)
+        ? delta * 0.2
+        : delta;
+    if (trackRef.current) {
+      trackRef.current.style.transition = "none";
+      trackRef.current.style.transform = `translateX(calc(-${current} * 100vw + ${resistedDelta}px))`;
     }
   };
 
@@ -436,10 +442,15 @@ export default function WrappedPage() {
     if (showShareSheet) return;
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
-    setDragOffset(0);
-    if (delta > 50) next();
-    else if (delta < -50) prev();
     touchStartX.current = null;
+    let newCurrent = current;
+    if (delta > 50) newCurrent = Math.min(current + 1, TOTAL - 1);
+    else if (delta < -50) newCurrent = Math.max(current - 1, 0);
+    if (trackRef.current) {
+      trackRef.current.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+      trackRef.current.style.transform = `translateX(calc(-${newCurrent} * 100vw))`;
+    }
+    setCurrent(newCurrent);
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -474,6 +485,7 @@ export default function WrappedPage() {
   ];
 
   return (
+    <>
     <div
       className="fixed inset-0 z-[60] overflow-hidden bg-black"
       style={{ touchAction: "none" }}
@@ -482,48 +494,18 @@ export default function WrappedPage() {
       onTouchEnd={handleTouchEnd}
       onClick={handleClick}
     >
-      {/* Slide track */}
+      {/* Slide track — transform is driven by direct DOM manipulation during
+          swipe (trackRef) to avoid re-renders that drop iOS fixed layers. */}
       <div
+        ref={trackRef}
         className="flex h-full"
         style={{
           width: `${TOTAL * 100}vw`,
-          transform: `translateX(calc(-${current} * 100vw + ${dragOffset}px))`,
-          transition: dragOffset !== 0 ? "none" : "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+          transform: `translateX(calc(-${current} * 100vw))`,
+          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         {slides}
-      </div>
-
-      {/* Close */}
-      <button
-        type="button"
-        onClick={() => router.push("/flows")}
-        className="absolute right-4 z-50 flex items-center justify-center w-11 h-11 rounded-full"
-        style={{
-          top: "calc(env(safe-area-inset-top) + 12px)",
-          background: "rgba(0,0,0,0.35)",
-        }}
-        aria-label="Exit Wrapped"
-      >
-        <X size={18} color="rgba(255,255,255,0.8)" />
-      </button>
-
-      {/* Progress dots — translate3d forces a GPU compositing layer so iOS
-          Safari doesn't drop them during active touch events */}
-      <div
-        className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-[65] pointer-events-none"
-        style={{ transform: "translate3d(0,0,0)" }}
-      >
-        {Array.from({ length: TOTAL }).map((_, i) => (
-          <div
-            key={i}
-            className="h-1 rounded-full transition-all duration-300"
-            style={{
-              width: i === current ? "24px" : "6px",
-              background: i === current ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.35)",
-            }}
-          />
-        ))}
       </div>
 
       {/* Toast */}
@@ -627,5 +609,41 @@ export default function WrappedPage() {
         </div>
       </div>
     </div>
+
+    {/* X button and progress dots are portaled to document.body so they live
+        completely outside the overlay's stacking/compositing context. This is
+        the only reliable way to prevent iOS Safari from dropping them when the
+        slide track creates a GPU compositor layer during swipe. */}
+    {mounted && createPortal(
+      <>
+        <button
+          type="button"
+          onClick={() => router.push("/flows")}
+          className="fixed right-4 z-[70] flex items-center justify-center w-11 h-11 rounded-full"
+          style={{
+            top: "calc(env(safe-area-inset-top) + 12px)",
+            background: "rgba(0,0,0,0.35)",
+          }}
+          aria-label="Exit Wrapped"
+        >
+          <X size={18} color="rgba(255,255,255,0.8)" />
+        </button>
+
+        <div className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-[70] pointer-events-none">
+          {Array.from({ length: TOTAL }).map((_, i) => (
+            <div
+              key={i}
+              className="h-1 rounded-full transition-all duration-300"
+              style={{
+                width: i === current ? "24px" : "6px",
+                background: i === current ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.35)",
+              }}
+            />
+          ))}
+        </div>
+      </>,
+      document.body
+    )}
+    </>
   );
 }
