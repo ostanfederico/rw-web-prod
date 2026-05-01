@@ -27,6 +27,8 @@ Next.js 16 (App Router, Turbopack) + Tailwind CSS v4 + TypeScript. Mobile-first:
 - `overscroll-behavior: none` on root — required for our manual pull-to-refresh; never disable.
 - Pull-to-refresh lives at `components/app-shell/PullToRefresh.tsx`. It listens at the window level and reloads the page when the gesture passes ~70px. Fires on every route automatically (it's in the root layout).
 - BottomNav is fixed, max-w 440 px, also safe-area-aware. Account for it: pages have `pb-24` from the layout wrapper. If your page needs more bottom space, add it inside `<main>`, not at the wrapper.
+- **iOS compositor rule:** when a flow animates an element via CSS `transform` (slide track, carousel, drawer), any sibling chrome that must stay visible during the gesture — dots, close buttons, overlays — must be rendered via `createPortal(content, document.body)`. iOS Safari promotes transformed elements to their own GPU compositor layer and will drop or shift siblings that aren't on their own layer. `z-index` and `translate3d(0,0,0)` do not fix this. Established pattern in this codebase: confetti canvas and Wrapped flow chrome both use portals for this reason.
+- **No setState during touchmove:** drive drag animations via a `ref` + direct DOM style mutation instead of React state. State updates on every touchmove cause re-renders that compound iOS compositor issues and cause jank independently.
 
 ## Hard rules
 
