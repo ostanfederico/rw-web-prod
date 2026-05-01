@@ -1,18 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { RefreshCw } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const TRIGGER = 70;
 const MAX_PULL = 120;
+const DISABLED_ON = ["/flows/wrapped"];
 
 export function PullToRefresh({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const disabled = DISABLED_ON.some((p) => pathname.startsWith(p));
   const startY = useRef<number | null>(null);
   const [pull, setPull] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
+    if (disabled) return;
+
     function atTop() {
       return (window.scrollY || document.documentElement.scrollTop) <= 0;
     }

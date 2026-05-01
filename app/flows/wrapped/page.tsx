@@ -389,6 +389,7 @@ const SOCIAL_OPTIONS = [
 export default function WrappedPage() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const [showHint, setShowHint] = useState(true);
   const [showShareSheet, setShowShareSheet] = useState(false);
@@ -420,10 +421,22 @@ export default function WrappedPage() {
     touchStartX.current = e.touches[0].clientX;
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (showShareSheet || touchStartX.current === null) return;
+    const delta = e.touches[0].clientX - touchStartX.current;
+    // Resist at the edges so it doesn't feel like it goes nowhere
+    if ((current === 0 && delta > 0) || (current === TOTAL - 1 && delta < 0)) {
+      setDragOffset(delta * 0.2);
+    } else {
+      setDragOffset(delta);
+    }
+  };
+
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (showShareSheet) return;
     if (touchStartX.current === null) return;
     const delta = touchStartX.current - e.changedTouches[0].clientX;
+    setDragOffset(0);
     if (delta > 50) next();
     else if (delta < -50) prev();
     touchStartX.current = null;
@@ -465,6 +478,7 @@ export default function WrappedPage() {
       className="fixed inset-0 z-[60] overflow-hidden bg-black"
       style={{ touchAction: "none" }}
       onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       onClick={handleClick}
     >
@@ -473,8 +487,8 @@ export default function WrappedPage() {
         className="flex h-full"
         style={{
           width: `${TOTAL * 100}vw`,
-          transform: `translateX(calc(-${current} * 100vw))`,
-          transition: "transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          transform: `translateX(calc(-${current} * 100vw + ${dragOffset}px))`,
+          transition: dragOffset !== 0 ? "none" : "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         {slides}
