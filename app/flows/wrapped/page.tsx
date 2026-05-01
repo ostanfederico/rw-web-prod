@@ -509,7 +509,7 @@ export default function WrappedPage() {
       </button>
 
       {/* Progress dots */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-50 pointer-events-none">
+      <div className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-[65] pointer-events-none">
         {Array.from({ length: TOTAL }).map((_, i) => (
           <div
             key={i}
