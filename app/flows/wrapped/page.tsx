@@ -508,8 +508,12 @@ export default function WrappedPage() {
         <X size={18} color="rgba(255,255,255,0.8)" />
       </button>
 
-      {/* Progress dots */}
-      <div className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-[65] pointer-events-none">
+      {/* Progress dots — translate3d forces a GPU compositing layer so iOS
+          Safari doesn't drop them during active touch events */}
+      <div
+        className="fixed bottom-8 left-0 right-0 flex justify-center items-center gap-1.5 z-[65] pointer-events-none"
+        style={{ transform: "translate3d(0,0,0)" }}
+      >
         {Array.from({ length: TOTAL }).map((_, i) => (
           <div
             key={i}
