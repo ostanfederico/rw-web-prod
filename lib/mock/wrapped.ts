@@ -18,7 +18,7 @@ export const wrappedData = {
   favouriteActivityPct: 43,
   biggestTx: { amount: 12400, token: "BTC", type: "purchase", date: "March 14" },
   personality: {
-    title: "The HODLer",
+    title: "The HOLDer",
     description:
       "You buy and rarely sell. Diamond hands. Your portfolio is in it for the long game.",
   },
